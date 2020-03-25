@@ -12,6 +12,7 @@ class PolylineUtils {
 
     var qParam = {
       'mode': getMode(_data.mode),
+      'avoid': getAvoid(_data.avoid),
       'key': _data.apiKey,
     };
 
@@ -81,6 +82,21 @@ class PolylineUtils {
         return 'walking';
       case RouteMode.bicycling:
         return 'bicycling';
+      default:
+        return null;
+    }
+  }
+  
+  String getAvoid(RouteAvoid _avoid) {
+    switch (_avoid) {
+      case RouteAvoid.tolls:
+        return 'tolls';
+      case RouteMode.highways:
+        return 'highways';
+      case RouteMode.ferries:
+        return 'ferries';
+      case RouteMode.indoor:
+        return 'indoor';
       default:
         return null;
     }
