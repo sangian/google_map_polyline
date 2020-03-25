@@ -17,6 +17,7 @@ class PolylineRequestData {
     this.originText,
     this.destinationText,
     this.mode,
+    this.avoid,
     this.locationText,
     this.apiKey,
   });
