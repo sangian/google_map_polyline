@@ -52,7 +52,6 @@ To use this plugin, add `google_map_polyline` as a [dependency in your pubspec.y
 	- [x] Tolls
 	- [x] Highways
 	- [x] Ferries
-	- [x] Indoor
 - [ ] Coordinates with Location Coordinates and Address (example: Origin as address and Destination as coordinates)
 - [ ] Alternative routes
 
