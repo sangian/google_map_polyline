@@ -1,4 +1,5 @@
 import 'package:google_map_polyline/src/route_mode.dart';
+import 'package:google_map_polyline/src/route_avoid.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PolylineRequestData {
