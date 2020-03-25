@@ -19,7 +19,7 @@ class GoogleMapPolyline {
     @required LatLng origin,
     @required LatLng destination,
     @required RouteMode mode,
-    RouteAvoid avoid,
+    List<RouteAvoid> avoid,
   }) async {
     _data = new PolylineRequestData(
         originLoc: origin,
@@ -40,7 +40,7 @@ class GoogleMapPolyline {
     @required String origin,
     @required String destination,
     @required RouteMode mode,
-    RouteAvoid avoid,
+    List<RouteAvoid> avoid,
   }) async {
     _data = new PolylineRequestData(
         originText: origin,
