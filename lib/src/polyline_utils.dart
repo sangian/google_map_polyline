@@ -93,18 +93,27 @@ class PolylineUtils {
     }
   }
   
-  String getAvoid(RouteAvoid _avoid) {
-    switch (_avoid) {
+  String getAvoid(List<RouteAvoid> _avoid) {
+    String avoid;
+    
+    int i = 1;
+    _avoid.forEach((item) {
+      switch (item) {
       case RouteAvoid.tolls:
-        return 'tolls';
+        avoid += 'tolls';
       case RouteMode.highways:
-        return 'highways';
+        avoid += 'highways';
       case RouteMode.ferries:
-        return 'ferries';
-      case RouteMode.indoor:
-        return 'indoor';
-      default:
-        return null;
-    }
+        avoid += 'ferries';
+      }
+      
+      if (i < _avoid.length) {
+        avoid += '|';
+      }
+      
+      i+=1;
+    });
+    
+    return avoid;
   }
 }
