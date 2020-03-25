@@ -18,11 +18,13 @@ class GoogleMapPolyline {
     @required LatLng origin,
     @required LatLng destination,
     @required RouteMode mode,
+    RouteAvoid avoid,
   }) async {
     _data = new PolylineRequestData(
         originLoc: origin,
         destinationLoc: destination,
         mode: mode,
+        avoid: avoid,
         locationText: false,
         apiKey: apiKey);
 
@@ -37,11 +39,13 @@ class GoogleMapPolyline {
     @required String origin,
     @required String destination,
     @required RouteMode mode,
+    RouteAvoid avoid,
   }) async {
     _data = new PolylineRequestData(
         originText: origin,
         destinationText: destination,
         mode: mode,
+        avoid: avoid,
         locationText: true,
         apiKey: apiKey);
 
