@@ -7,6 +7,7 @@ class PolylineRequestData {
   String originText;
   String destinationText;
   RouteMode mode;
+  RouteAvoid avoid;
   bool locationText;
   String apiKey;
 
