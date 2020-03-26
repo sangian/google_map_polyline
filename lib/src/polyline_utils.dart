@@ -28,7 +28,7 @@ class PolylineUtils {
           "${_data.destinationLoc.latitude},${_data.destinationLoc.longitude}";
     }
     
-    print("DEBUG: qParam=${jsonDecode(qParam)}");
+    print("DEBUG: qParam=${jsonEncode(qParam)}");
 
     Response _response;
     Dio _dio = new Dio();
@@ -45,7 +45,8 @@ class PolylineUtils {
         _coordinates = decodeEncodedPolyline(
             _response.data['routes'][0]['overview_polyline']['points']);
         
-        print("DEBUG: _coordinates=${jsonDecode(_coordinates)}");
+        print("DEBUG: data=${jsonEncode(_response.data)}");
+        print("DEBUG: _coordinates=${jsonEncode(_coordinates)}");
       }
     } catch (e) {
       print('error!!!! $e');
