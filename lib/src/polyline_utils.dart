@@ -94,7 +94,7 @@ class PolylineUtils {
   }
   
   String getAvoid(List<RouteAvoid> _avoid) {
-    String avoid;
+    String avoid = '';
     
     int i = 1;
     _avoid.forEach((item) {
@@ -113,6 +113,7 @@ class PolylineUtils {
       i+=1;
     });
     
-    return avoid;
+    if (avoid == '')
+      return null;
   }
 }
