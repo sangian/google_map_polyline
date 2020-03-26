@@ -101,9 +101,9 @@ class PolylineUtils {
       switch (item) {
       case RouteAvoid.tolls:
         avoid += 'tolls';
-      case RouteMode.highways:
+      case RouteAvoid.highways:
         avoid += 'highways';
-      case RouteMode.ferries:
+      case RouteAvoid.ferries:
         avoid += 'ferries';
       }
       
