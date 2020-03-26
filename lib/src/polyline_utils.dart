@@ -101,8 +101,6 @@ class PolylineUtils {
   String getAvoid(List<RouteAvoid> _avoid) {
     String avoidStr = '';
     
-    print("DEBUG: _avoid=${jsonEncode(_avoid)}");
-    
     int i = 1;
     _avoid.forEach((item) {
       if (item == RouteAvoid.tolls) {
