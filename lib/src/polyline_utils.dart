@@ -98,12 +98,11 @@ class PolylineUtils {
     
     int i = 1;
     _avoid.forEach((item) {
-      switch (item) {
-      case RouteAvoid.tolls:
+      if (item == RouteAvoid.tolls) {
         avoid += 'tolls';
-      case RouteAvoid.highways:
+      } else if (item == RouteAvoid.highways) {
         avoid += 'highways';
-      case RouteAvoid.ferries:
+      } else if (item == RouteAvoid.ferries) {
         avoid += 'ferries';
       }
       
