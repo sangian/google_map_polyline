@@ -46,7 +46,6 @@ class PolylineUtils {
             _response.data['routes'][0]['overview_polyline']['points']);
         
         print("DEBUG: data=${jsonEncode(_response.data)}");
-        print("DEBUG: _coordinates=${jsonEncode(_coordinates)}");
       }
     } catch (e) {
       print('error!!!! $e');
@@ -100,26 +99,32 @@ class PolylineUtils {
   }
   
   String getAvoid(List<RouteAvoid> _avoid) {
-    String avoid = '';
+    String avoidStr = '';
+    
+    print("DEBUG: _avoid=${jsonEncode(_avoid)}");
     
     int i = 1;
     _avoid.forEach((item) {
       if (item == RouteAvoid.tolls) {
-        avoid += 'tolls';
+        avoidStr = avoidStr + 'tolls';
       } else if (item == RouteAvoid.highways) {
-        avoid += 'highways';
+        avoidStr = avoidStr + 'highways';
       } else if (item == RouteAvoid.ferries) {
-        avoid += 'ferries';
+        avoidStr = avoidStr + 'ferries';
       }
       
       if (i < _avoid.length) {
-        avoid += '|';
+        avoidStr = avoidStr + '|';
       }
       
       i+=1;
     });
     
-    if (avoid == '')
+    print("DEBUG: avoidStr=$avoidStr");
+    
+    if (avoidStr == '')
       return null;
+    
+    return avoidStr;
   }
 }
