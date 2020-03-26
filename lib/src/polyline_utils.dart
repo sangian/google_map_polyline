@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:google_map_polyline/src/route_mode.dart';
 import 'package:google_map_polyline/src/route_avoid.dart';
@@ -26,6 +27,8 @@ class PolylineUtils {
       qParam['destination'] =
           "${_data.destinationLoc.latitude},${_data.destinationLoc.longitude}";
     }
+    
+    print("DEBUG: qParam=${jsonDecode(qParam)}");
 
     Response _response;
     Dio _dio = new Dio();
@@ -41,6 +44,8 @@ class PolylineUtils {
         
         _coordinates = decodeEncodedPolyline(
             _response.data['routes'][0]['overview_polyline']['points']);
+        
+        print("DEBUG: _coordinates=${jsonDecode(_coordinates)}");
       }
     } catch (e) {
       print('error!!!! $e');
