@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:google_map_polyline/src/directions_response.dart';
 import 'package:google_map_polyline/src/route_mode.dart';
 import 'package:google_map_polyline/src/route_avoid.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -55,7 +56,52 @@ class PolylineUtils {
     return _coordinates;
   }
 
-  List<LatLng> decodeEncodedPolyline(String encoded) {
+  Future<DirectionsResponse> getDirections() async {
+    DirectionsResponse _directions;
+
+    var qParam = {
+      'mode': getMode(_data.mode),
+      'avoid': getAvoid(_data.avoid),
+      'key': _data.apiKey,
+    };
+
+    if (_data.locationText) {
+      qParam['origin'] = _data.originText;
+      qParam['destination'] = _data.destinationText;
+    } else {
+      qParam['origin'] =
+      "${_data.originLoc.latitude},${_data.originLoc.longitude}";
+      qParam['destination'] =
+      "${_data.destinationLoc.latitude},${_data.destinationLoc.longitude}";
+    }
+
+    print("DEBUG: qParam=${jsonEncode(qParam)}");
+
+    Response _response;
+    Dio _dio = new Dio();
+    _response = await _dio.get(
+        "https://maps.googleapis.com/maps/api/directions/json",
+        queryParameters: qParam);
+
+    try {
+      if (_response.statusCode == 200) {
+        if (_response.data["status"] == "REQUEST_DENIED") {
+          throw Exception(_response.data["error_message"]);
+        }
+
+        _directions = DirectionsResponse.fromJson(_response.data);
+
+        print("DEBUG: data=${jsonEncode(_response.data)}");
+      }
+    } catch (e) {
+      print('error!!!! $e');
+      throw e;
+    }
+
+    return _directions;
+  }
+
+  static List<LatLng> decodeEncodedPolyline(String encoded) {
     List<LatLng> poly = [];
     int index = 0, len = encoded.length;
     int lat = 0, lng = 0;
@@ -85,7 +131,7 @@ class PolylineUtils {
     return poly;
   }
 
-  String getMode(RouteMode _mode) {
+  static String getMode(RouteMode _mode) {
     switch (_mode) {
       case RouteMode.driving:
         return 'driving';
@@ -98,7 +144,7 @@ class PolylineUtils {
     }
   }
   
-  String getAvoid(List<RouteAvoid> _avoid) {
+  static String getAvoid(List<RouteAvoid> _avoid) {
     String avoidStr = '';
     
     int i = 1;
