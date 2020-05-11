@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:google_map_polyline/src/directions_response.dart';
 import 'package:google_map_polyline/src/route_mode.dart';
 import 'package:google_map_polyline/src/route_avoid.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -32,6 +33,27 @@ class GoogleMapPolyline {
     _utils = new PolylineUtils(_data);
 
     return await _utils.getCoordinates();
+  }
+
+  /// Get directions using Location Coordinates
+  /// Example : LatLng(40.677939, -73.941755)
+  Future<DirectionsResponse> getDirectionsWithLocation({
+    @required LatLng origin,
+    @required LatLng destination,
+    @required RouteMode mode,
+    List<RouteAvoid> avoid,
+  }) async {
+    _data = new PolylineRequestData(
+        originLoc: origin,
+        destinationLoc: destination,
+        mode: mode,
+        avoid: avoid,
+        locationText: false,
+        apiKey: apiKey);
+
+    _utils = new PolylineUtils(_data);
+
+    return await _utils.getDirections();
   }
 
   /// Get coordinates using Location Coordinates
